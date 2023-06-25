@@ -93,8 +93,8 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  return a + b > c && a + c > b && b + c > a;
 }
 
 
@@ -179,6 +179,13 @@ function isInsideCircle(/* circle, point */) {
  */
 function findFirstSingleChar(/* str */) {
   throw new Error('Not implemented');
+  // for (let i = 0; i < str.length; 1 + i) {
+  //   const char = str[i];
+  //   if (str.indexOf(char) === i && str.indexOf(char, i + 1) === -1) {
+  //     return char;
+  //   }
+  // }
+  // return null;
 }
 
 
@@ -221,8 +228,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 

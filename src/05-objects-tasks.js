@@ -116,35 +116,56 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
-  },
+class CssSelectorBuilder {
+  constructor() {
+    this.elements = [];
+    this.combinators = [];
+  }
 
-  id(/* value */) {
-    throw new Error('Not implemented');
-  },
+  element(value) {
+    this.elements.push(value);
+    return this;
+  }
 
-  class(/* value */) {
-    throw new Error('Not implemented');
-  },
+  id(value) {
+    this.elements.push(`#${value}`);
+    return this;
+  }
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
-  },
+  class(value) {
+    this.elements.push(`.${value}`);
+    return this;
+  }
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
-  },
+  attr(value) {
+    this.elements.push(`[${value}]`);
+    return this;
+  }
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
-  },
+  pseudoClass(value) {
+    this.elements.push(`:${value}`);
+    return this;
+  }
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
-  },
-};
+  pseudoElement(value) {
+    this.elements.push(`::${value}`);
+    return this;
+  }
+
+  combine(selector1, combinator, selector2) {
+    this.combinators.push(`${selector1.stringify()} ${combinator} ${selector2.stringify()}`);
+    return this;
+  }
+
+  stringify() {
+    const result = [...this.elements, ...this.combinators].join('');
+    this.elements = [];
+    this.combinators = [];
+    return result;
+  }
+}
+
+const cssSelectorBuilder = new CssSelectorBuilder();
 
 
 module.exports = {
